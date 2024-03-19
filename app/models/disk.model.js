@@ -1,14 +1,20 @@
 const mongoose = require('mongoose');
 
 const Disk = mongoose.model(
-    "disk",
+    "Disk",
     new mongoose.Schema({
-        name: String,
-        author: String,
-        realeseDate: String,
-        NumbersOfSong: Number,
-        Description: String,
-        Credits: String,
+        title: String,
+        type: String,
+        artist: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Artist"
+            }
+        ],
+        realese_date: String,
+        description: String,
+        created_at: String,
+        updated_at: String
     })
 );
 

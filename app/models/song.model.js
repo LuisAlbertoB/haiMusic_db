@@ -1,15 +1,36 @@
 const mongoose = require('mongoose');
 
 const Song = mongoose.model(
-    "song",
+    "Song",
     new mongoose.Schema({
-        fileSrc: String,
+        src: String,
         name: String,
-        author: String,
-        Disk: String,
-        numberAlbum: Number,
+        artist: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Artist",
+                
+            }
+        ],
+        disk: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Disk",
+            }
+        ],
         description: String,
-        dredits: String,
+        credits: String,
+        likes: Number,
+        favs: Number,
+        downloads: Number,
+        created_at: String,
+        created_by: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            }
+        ],
+        updated_at: String,
     })
 );
 

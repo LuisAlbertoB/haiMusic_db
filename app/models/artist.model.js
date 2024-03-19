@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 
 const Artist = mongoose.model(
-    "artist",
+    "Artist",
     new mongoose.Schema({
         name: String,
         birthDay: String,
         bio: String,
-        link: String,
+        created_at: String,
+        updated_at: String
     })
 );
 
