@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const dbConfig = require("./app/config/db.config");
 
 const app = express();
 
@@ -36,6 +37,9 @@ db.mongoose
 app.get("/", (req, res) => {
     res.json({ message: "Bienvenido a Hai Music Aplication" });
 });
+
+require('./app/routers/auth.routes')(app);
+require('./app/routers/user.routes')(app);
 
 //Establecer puerto y escuchar solicitud
 const PORT = process.env.PORT || 8080;

@@ -18,19 +18,19 @@ const User = mongoose.model(
         liked_list: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "",
+                ref: "LikedList",
             }
         ],
         fav_list: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "",
+                ref: "FavList",
             }
         ],
         download_list: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "",
+                ref: "Download",
             }
         ],
         creadet_at: String
