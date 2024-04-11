@@ -20,10 +20,7 @@ const db = require("./app/models");
 const Role = db.role;
 
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`)
   .then(() => {
     console.log("Exito al conectar con mongo db");
     initial();
@@ -47,7 +44,7 @@ app.listen(PORT, () => {
     console.log(`El servidor esta corriendo en el puerto: ${PORT}.`);
 });
 
-function initial() {
+/* function initial() {
     Role.estimatedDocumentCount((err, count) => {
       if (!err && count === 0) {
         new Role({
@@ -71,4 +68,19 @@ function initial() {
         });
       }
     });
-  }
+  } */
+  
+async function initial() {
+    try {
+        const count = await Role.estimatedDocumentCount();
+        if (count === 0) {
+            await Promise.all([
+                new Role({ name: "user" }).save(),
+                new Role({ name: "admin" }).save()
+            ]);
+            console.log("Roles activados e iniciados");
+        }
+    } catch (error) {
+        console.error("error al iniciar los roles checalo", error);
+    }
+}
